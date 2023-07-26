@@ -1,42 +1,37 @@
-function App() {
-  const title = 'Blog Post'
-  const body = 'This is my blog post'
-  const comments = [
-    { id: 1, text: 'Comment 1' },
-    { id: 2, text: 'Comment 2' },
-    { id: 3, text: 'Comment 3' },
-  ]
+import { useState } from 'react'
 
-  const loading = false
-  const showComments = true
-  if (loading) return <h1>Loading...</h1>
+import Header from './components/Header'
+import FeedbackItem from './components/FeedbackItem'
+import FeedbackList from './components/FeedbackList'
+import FeedbackStats from './components/FeedbackStats'
+
+import FeedbackData from './data/FeedbackData'
+
+function App() {
+  const [feedback, setFeedback] = useState(FeedbackData)
+
+  const deleteFeedback = (id) => {
+    if (window.confirm('Are you sure you want to delete?')) {
+      setFeedback(feedback.filter((item) => item.id !== id))
+    }
+  }
 
   return (
-    <div className="container">
-      {/* <h1>Shree Ganesh</h1> */}
-      <h1>{title.toUpperCase()}</h1>
-      <h2>{body}</h2>
-
-      {showComments ? (
-        <ul>
-          {comments.map((items) => (
-            <li key={items.id}>
-              {items.id}. {items.text}
-            </li>
-          ))}
-        </ul>
-      ) : null}
-
-      {showComments && (
-        <ul>
-          {comments.map((items) => (
-            <li key={items.id}>
-              {items.id}. {items.text}
-            </li>
-          ))}
-        </ul>
-      )}
-    </div>
+    <>
+      <Header />
+      <div className="container">
+        {/* <FeedbackItem /> */}
+        <FeedbackStats feedback={feedback} />
+        <FeedbackList
+          feedback={feedback}
+          handleDelete={deleteFeedback}
+        />
+      </div>
+    </>
   )
 }
+// Header.defaultProps = {
+//   text: 'Feedback UI',
+// }
+
 export default App
