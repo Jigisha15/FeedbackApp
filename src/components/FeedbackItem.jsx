@@ -3,7 +3,7 @@ import { useState } from 'react'
 
 import { FaTimes } from 'react-icons/fa'
 
-import Card from '../shared/Card'
+import Card from './shared/Card'
 import FeedbackList from './FeedbackList'
 
 function FeedbackItem({ item, handleDelete }) {
@@ -28,7 +28,7 @@ FeedbackItem.propTypes = {
   item: PropTypes.object.isRequired,
 }
 
-FeedbackList.propTypes = {
+FeedbackItem.propTypes = {
   feedback: PropTypes.arrayOf(
     PropTypes.shape({
       id: PropTypes.number.isRequired,
@@ -37,4 +37,5 @@ FeedbackList.propTypes = {
     })
   ),
 }
+
 export default FeedbackItem
