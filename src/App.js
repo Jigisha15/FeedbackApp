@@ -16,8 +16,9 @@ import Card from './components/shared/Card'
 import Post from './components/Post'
 
 import AboutPage from './pages/AboutPage'
+import { FeedbackProvider } from './context/FeedbackContext'
 
-import FeedbackProvider from './context/FeedbackContext'
+// import FeedbackProvider from './context/FeedbackContext'
 
 import FeedbackData from './data/FeedbackData'
 
@@ -37,36 +38,36 @@ function App() {
   }
 
   return (
-    // <FeedbackProvider>
-    <Router>
-      <Header />
-      <div className="container">
-        <Routes>
-          <Route
-            exact
-            path="/"
-            element={
-              <>
-                <FeedbackForm handleAdd={addFeedback} />
-                <FeedbackStats feedback={feedback} />
-                <FeedbackList
-                  feedback={feedback}
-                  handleDelete={deleteFeedback}
-                />
-              </>
-            }
-          ></Route>
-          <Route
-            path="/about"
-            Component={AboutPage}
-          />
-          <Route
-            path="/post/*"
-            Component={Post}
-          />
-        </Routes>
+    <FeedbackProvider>
+      <Router>
+        <Header />
+        <div className="container">
+          <Routes>
+            <Route
+              exact
+              path="/"
+              element={
+                <>
+                  <FeedbackForm handleAdd={addFeedback} />
+                  <FeedbackStats feedback={feedback} />
+                  <FeedbackList
+                    feedback={feedback}
+                    handleDelete={deleteFeedback}
+                  />
+                </>
+              }
+            ></Route>
+            <Route
+              path="/about"
+              Component={AboutPage}
+            />
+            <Route
+              path="/post/*"
+              Component={Post}
+            />
+          </Routes>
 
-        {/* <Card>
+          {/* <Card>
           <NavLink
             to="/"
             activeClassName="active"
@@ -87,10 +88,10 @@ function App() {
           </NavLink>
         </Card> */}
 
-        <AboutIconLink />
-      </div>
-    </Router>
-    // </FeedbackProvider>
+          <AboutIconLink />
+        </div>
+      </Router>
+    </FeedbackProvider>
   )
 }
 

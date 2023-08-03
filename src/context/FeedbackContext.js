@@ -1,7 +1,20 @@
-import React from 'react'
+import { createContext, useState } from 'react'
 
-function FeedbackProvider() {
-  return <div></div>
+const FeedbackContext = createContext()
+
+export const FeedbackProvider = ({ children }) => {
+  const [feedback, setFeedback] = useState([
+    {
+      id: 1,
+      text: 'This is first item from context',
+      rating: 10,
+    },
+  ])
+  return (
+    <FeedbackContext.Provider value={{ feedback }}>
+      {children}
+    </FeedbackContext.Provider>
+  )
 }
 
-export default FeedbackProvider
+export default FeedbackContext
